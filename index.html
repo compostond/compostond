@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Compostond</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5f7f6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* HEADER */
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.subtitle {
+    color: #666;
+    margin-top: 10px;
+}
+
+/* CARD */
+.card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+h1 {
+    font-size: 22px;
+    color: #2e7d32;
+}
+
+input {
+    width: 90%;
+    padding: 12px;
+    margin-top: 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    text-align: center;
+}
+
+button {
+    margin-top: 20px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #2e7d32;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #1b5e20;
+}
+
+.result {
+    margin-top: 25px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #2e7d32;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: 0.4s;
+}
+
+.result.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* FOOTER */
+.footer {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #888;
+}
+
+.footer a {
+    color: #2e7d32;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">Compostond</div>
+    <div class="subtitle">Transformons les biodéchets en ressource</div>
+</div>
+
+<div class="card">
+    <h1>Je transforme mes biodéchets en compost</h1>
+
+    <input type="number" id="kg" placeholder="Quantité de déchets alimentaires (en kg)">
+
+    <br>
+
+    <button onclick="calcul()">Calculer</button>
+
+    <div class="result" id="resultat"></div>
+</div>
+
+<div class="footer">
+    <a href="https://compostond.fr/" target="_blank">Découvrir Compostond</a>
+</div>
+
+<script>
+function calcul() {
+    let kg = document.getElementById("kg").value;
+    let result = document.getElementById("resultat");
+
+    if (kg <= 0 || kg === "") {
+        result.innerText = "Entre une valeur valide";
+        result.classList.add("show");
+        return;
+    }
+
+    let compost = kg * 0.4;
+
+    result.innerHTML = compost.toFixed(2) + " kg de compost produit grâce à Compostond";
+    result.classList.add("show");
+}
+</script>
+
+</body>
+</html>
