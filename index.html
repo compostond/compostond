@@ -89,6 +89,18 @@ button:hover {
     transform: translateY(0);
 }
 
+.extra {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+    display: none;
+}
+
+.extra.show {
+    display: block;
+}
+
 /* FOOTER */
 .footer {
     margin-top: 30px;
@@ -116,15 +128,19 @@ button:hover {
 </div>
 
 <div class="card">
-    <h1>Je transforme mes biodéchets en compost</h1>
+    <h1>Je transforme mes biodéchets</h1>
 
     <input type="number" id="kg" placeholder="Quantité de déchets alimentaires (en kg)">
-
     <br>
 
-    <button onclick="calcul()">Calculer</button>
+    <button onclick="calculImpact()">Calculer</button>
 
     <div class="result" id="resultat"></div>
+
+    <div class="extra" id="extra">
+        Si l'on intègre le fait que ce compost remplace les engrais chimiques, 
+        on atteint la barre des 1 kg de CO₂ évité par kg de déchet alimentaire !
+    </div>
 </div>
 
 <div class="footer">
@@ -132,20 +148,27 @@ button:hover {
 </div>
 
 <script>
-function calcul() {
+function calculImpact() {
     let kg = document.getElementById("kg").value;
     let result = document.getElementById("resultat");
+    let extra = document.getElementById("extra");
 
     if (kg <= 0 || kg === "") {
         result.innerText = "Entre une valeur valide";
         result.classList.add("show");
+        extra.classList.remove("show");
         return;
     }
 
     let compost = kg * 0.4;
+    let co2 = kg * 0.85;
 
-    result.innerHTML = compost.toFixed(2) + " kg de compost produit grâce à Compostond";
+    result.innerHTML = 
+        compost.toFixed(2) + " kg de compost produit<br><br>" +
+        co2.toFixed(2) + " kg de CO₂ évités en compostant plutôt qu'en enfouissant";
+
     result.classList.add("show");
+    extra.classList.add("show");
 }
 </script>
 
